@@ -1,15 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
+
 import Login from './paginas/Login/Login';
 import PainelAdm from './paginas/PainelAdm/PainelAdm';
 
-// ReactDOM.render(<Login />, document.getElementById('root'));
-ReactDOM.render(<PainelAdm />, document.getElementById('root'));
+import {usuarioAutenticado} from "./servicos/auth";
+import {parseJwt} from './servicos/auth';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const PermissaoAdmin = ({ component: Component }) => (
+    <Route
+      render={props =>
+        usuarioAutenticado() && parseJwt().Permissao === "Administrador" ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/login" }} />
+        )
+      }
+    />
+);
+
+const routing = (
+    <Router>
+        <div>
+            <Switch>
+                <Route exact path="/" component={Login}/>
+                {/* <Route path="/login" component={Login} /> */}
+                <PermissaoAdmin path="/painel" component={PainelAdm}/>
+            </Switch>
+        </div>
+    </Router>
+);
+
+ReactDOM.render(routing, document.getElementById('root'));
