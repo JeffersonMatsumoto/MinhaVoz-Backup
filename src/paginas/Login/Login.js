@@ -34,14 +34,13 @@ class Login extends Component {
                         <img src={Logo} alt='Logo SENAI'
                             style={{
                                 // margin: 'auto'
-                                marginTop: '5%',
-                                padding: '25%',
+                                marginTop: '10%',
+                                padding: '23.2%',
                                 borderRight: '1px solid black'
-                                // borderRight: 'solid 1px'
-                            }} />
+                            }}/>
                         <form style={{ display: 'flex', flexDirection: 'column', 
                             // margin: 'auto'
-                            marginTop: '5%',
+                            marginTop: '10%',
                             padding: '25%'
                              }}>
                             <h2 style={{ textAlign: 'center' }}>Login</h2>
