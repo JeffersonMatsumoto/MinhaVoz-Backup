@@ -1,7 +1,8 @@
 import axios from 'axios';
 export default {
   call(endpoint) {
-    let urlApi = `http://localhost:5000/api/${endpoint}`;
+    // let urlApi = `http://localhost:5000/api/${endpoint}`;
+    let urlApi = `http://192.168.4.32:5000/api/${endpoint}`;
 
     return {
       getOne: ({ id }) => axios.get(`${urlApi}/${id}`),

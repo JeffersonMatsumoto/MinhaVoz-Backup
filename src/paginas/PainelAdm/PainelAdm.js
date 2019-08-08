@@ -25,7 +25,7 @@ class PainelAdm extends Component {
 
     listarChamados() {
 
-        Axios.get("http://localhost:5000/api/chamados",
+        Axios.get("http://192.168.4.32:5000/listar",
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -114,7 +114,7 @@ class PainelAdm extends Component {
                                                 <div style={{ gridArea: 'status', padding: '1%', margin: 'auto', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                     <p style={{ padding: '5%', border: '1px solid black' }}>Status</p>
                                                     <div style={{ padding: '5%', border: '1px solid black' }}>
-                                                        {/* {this.verificaStatus()} */}{chamado.status}
+                                                        {this.verificaStatus()}{chamado.status}
                                                     </div>
                                                 </div>
                                             </div>

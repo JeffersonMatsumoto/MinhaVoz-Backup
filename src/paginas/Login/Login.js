@@ -20,7 +20,7 @@ class Login extends Component {
     efetuarLogin = (event) => {
         event.preventDefault();
     
-        Axios.post("http://localhost:5000/api/login", {
+        Axios.post("http://192.168.4.32:5000/api/Login", {
           email: this.state.email,
           senha: this.state.senha
         })
@@ -100,7 +100,7 @@ class Login extends Component {
                             </label>
 
                             <button
-                                style= {{ backgroundColor: '#151515', color: '#FFF', width: '50%', marginInlineStart: 'auto', marginInlineEnd: 'auto', padding: '3%'}}
+                                style= {{ backgroundColor: '#151515', color: '#FFF', width: '50%', marginInlineStart: 'auto', marginInlineEnd: 'auto', padding: '3%', fontFamily: 'Montserrat'}}
                                 type='submit'
                                 {...this.state.isLoading ? 'disabled' : ''}
                             >
