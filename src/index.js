@@ -11,10 +11,10 @@ import {parseJwt} from './servicos/auth';
 const PermissaoAdmin = ({ component: Component }) => (
     <Route
       render={props =>
-        usuarioAutenticado()  === "" ? (
+        usuarioAutenticado() === true ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: "/login" }} />
+          <Redirect to={{ pathname: "/painel" }} />
         )
       }
     />
@@ -24,7 +24,7 @@ const routing = (
     <Router>
         <div>
             <Switch>
-                <Route exact path="/" component={PainelAdm}/>
+                <Route exact path="/" component={Login}/>
                 {/* <Route path="/login" component={Login} /> */}
                 <PermissaoAdmin path="/painel" component={PainelAdm}/>
             </Switch>
