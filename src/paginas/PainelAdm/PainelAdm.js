@@ -187,7 +187,7 @@ class PainelAdm extends Component {
                         <img src={Logo} style={{ width: '20%', height: '100%', marginLeft: '5%' }} alt='Logo SENAI' />
                         <div style={{ display: 'flex', justifyContent: "flex-end", width: '100%', marginRight: '5%' }}>
                             <span style={{ marginLeft: 'auto', textDecoration: 'none', color: 'black' }}>Bem vindo, <b>Administrador</b></span>
-                            <a onClick={this.Sair.bind(this)} style={{ marginLeft: 'auto', cursor: 'pointer', color: '#BF0811', fontWeight: '700' }}>Sair</a>
+                            <a href='/login' onClick={this.Sair.bind(this)} style={{ marginLeft: 'auto', cursor: 'pointer', color: '#BF0811', fontWeight: '700' }}>Sair</a>
                         </div>
                     </div>
                     {/* ------------------------------ FIM HEADER ------------------------------ */}
@@ -205,13 +205,14 @@ class PainelAdm extends Component {
                                 // margin: 'auto',
                                 marginLeft: '20%',
                                 marginRight: '2%',
+                                paddingBottom: '3%',
                                 border: '2px solid #f2f2f2',
                                 boxShadow: '1px 1px 6px 0px #F9F9F9',
                                 borderRadius: '3px'
                             }}>
                                 <h3 style={{ fontSize: '16px', textAlign: 'left', textTransform: 'capitalize', color: '#BF0811', paddingLeft: '5%' }}>TOTAL DE CHAMADOS PENDENTES:</h3>
                                 {/* Contador de chamados pendentes */}
-                                <p style={{ textAlign: 'center', fontSize: '3em', margin: '0' }}>
+                                <p style={{ textAlign: 'center', fontSize: '3em', fontWeight:'700', margin: '0' }}>
                                     {/* {this.qtdChamadoPendente()} */}
                                     {this.state.a}
                                 </p>
@@ -221,57 +222,66 @@ class PainelAdm extends Component {
                                 display: 'flex', flexDirection: 'column',
                                 // margin: 'auto', 
                                 marginRight: '20%',
-                                marginLeft: '2%',
+                                // marginLeft: '2%',
                                 border: '2px solid #f2f2f2',
-                                boxShadow: '1px 1px 6px 0px #F9F9F9f2f2f2',
+                                boxShadow: '1px 1px 6px 0px #f2f2f2',
                                 borderRadius: '3px'
                             }}>
                                 <h3 style={{ fontSize: '16px', textAlign: 'left', textTransform: 'capitalize', color: '#BF0811', paddingLeft: '5%' }}>TOTAL DE CHAMADOS:</h3>
-                                <p style={{ textAlign: 'center', fontSize: '3em', margin: '0' }}>{this.state.qtdChamado}</p>
+                                <p style={{ textAlign: 'center', fontSize: '3em', fontWeight:'700', margin: '0' }}>{this.state.qtdChamado}</p>
                             </div>
 
                         </div>
 
                         {/* ------------------------------ EDITAR ------------------------------ */}
-                        <p>Selecione o ID do chamado para alterar o status:</p>
-                        <form onSubmit={this.alterarStatus.bind(this)}>
 
-                        <div>
-                            <select name="idSelecionado" onChange={this.atualizarEstado} required>
-                            <option defaultValue> </option>
-                                {
-                                    this.state.listaChamados.map(function (chamado) {
-                                        return (
-                                            <option key={chamado.id} value={chamado.id}>
-                                                {chamado.id}
-                                            </option>
-                                        );
-                                    })
-                                }
-                            </select>
-                        </div>
 
-                        <label>Selecione o status do chamado:</label>
+                        <div style={{paddingTop: '8%', paddingLeft: '11%'}}>
+                        <p style={{fontWeight: 'bold', fontSize: '2em', lineHeight: '0', paddingBottom: '2%' }}> Alterar chamado</p>
+
                         
-                        <select
-                            value={this.state.status}
-                            name="status"
-                            onChange={this.atualizarEstado}
-                        >
-                            <option defaultValue> </option>
-                            <option value="Arquivado">Arquivado</option>
-                            <option value='Em Análise'>Em Análise</option>
-                            <option value='Atendido'>Atendido</option>
-                        </select>
+                            <form onSubmit={this.alterarStatus.bind(this)}>
+                            <label>Selecione o ID do chamado:</label>
 
-                        {/* <input value={this.state.status}
-                                type='text'
-                        name='status'
-                                    required
-                                    onChange={this.atualizarEstado}></input> */}
+                            <div style={{display: 'inline-block', paddingLeft:'10px'}}>
+                                <select style={{height: '30px', width:'180px'}} name="idSelecionado" onChange={this.atualizarEstado} required>
+                                <option defaultValue> </option>
+                                    {
+                                        this.state.listaChamados.map(function (chamado) {
+                                            return (
+                                                <option key={chamado.id} value={chamado.id}>
+                                                    {chamado.id}
+                                                </option>
+                                            );
+                                        })
+                                    }
+                                </select>
+                            </div>
 
-                        <button type="submit">Alterar status</button>
-                    </form>
+                            <label style={{padding: '0 10px 0 2%'}}>Selecione o status do chamado:</label>
+                            
+                            <select
+                                value={this.state.status}
+                                name="status"
+                                onChange={this.atualizarEstado}
+                                style={{height: '30px', width: '190px'}}
+                                
+                            >
+                                <option defaultValue> </option>
+                                <option value="Arquivado">Arquivado</option>
+                                <option value='Em Análise'>Em Análise</option>
+                                <option value='Atendido'>Atendido</option>
+                            </select>
+
+                            {/* <input value={this.state.status}
+                                    type='text'
+                            name='status'
+                                        required
+                                        onChange={this.atualizarEstado}></input> */}
+
+                            <button style={{border:'none', borderRadius: '0 3px 3px 0', backgroundColor:'black', padding: '2px 20px 0 20px', height: '30px', color: 'white', fontFamily:'Montserrat', }}type="submit">Alterar status</button>
+                        </form>
+                    </div>
                         {/* ------------------------------ FIM EDITAR ------------------------------ */}
 
                         <div>
@@ -281,13 +291,13 @@ class PainelAdm extends Component {
                                 gridTemplateColumns: '1fr 1fr',
                                 gridTemplateAreas: `'chamado data' 'nome email' 'telefone assunto ' 'titulo titulo' 'mensagem mensagem' 'status status'`,
                                 width: '80%',
-                                margin: '2% 10% 2% 10%'
+                                margin: '1% 10% 2% 10%'
                             }}>
                                 {
                                     this.state.listaChamados.map(function (chamado) {
                                         if (chamado.status === "Em Análise" || chamado.status === "Pendente") {
                                             return (
-                                                <div style={{ border: '2px solid #f2f2f2', margin: '2%', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
+                                                <div key={chamado.id} style={{ border: '2px solid #f2f2f2', margin: '1% 2% 2% 0', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
                                                     <h2 style={{ gridArea: 'chamado', textAlign: 'center' }}><b>Chamado #  {chamado.id}</b></h2>
                                                     <p style={{ gridArea: 'data', padding: '1%' }}><b>Data do chamado:</b>  {chamado.data.split("T")[0].split("-")[2]}/
                                                                                                                         {chamado.data.split("T")[0].split("-")[1]}/
@@ -298,7 +308,7 @@ class PainelAdm extends Component {
                                                     <p style={{ gridArea: 'assunto', padding: '1%' }}><b>Assunto:</b>          {chamado.assunto}</p>
                                                     <p style={{ gridArea: 'titulo', padding: '1%' }}><b>Título:</b>            {chamado.titulo}</p>
                                                     <p style={{ gridArea: 'mensagem', padding: '1%' }}><b>Mensagem:</b>        {chamado.descricao}</p>
-                                                    <div style={{ gridArea: 'status', padding: '1%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderTop: '1px solid #BF0811' }}>
+                                                    <div style={{ gridArea: 'status', padding: '1%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderTop: '1px solid #cccccc' }}>
                                                         <p style={{ paddingRight: '1%' }}><b>Status:</b></p>
 
                                                         <div style={{ color: 'orange', fontWeight: 'bolder', fontStyle: 'italic' }}>
@@ -312,7 +322,7 @@ class PainelAdm extends Component {
                                             );
                                         } else if (chamado.status === "Atendido" || chamado.status === "Resolvido") {
                                             return (
-                                                <div style={{ border: '2px solid #f2f2f2', margin: '2%', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
+                                                <div key={chamado.id} style={{ border: '2px solid #f2f2f2', margin: '2%', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
                                                     <h2 style={{ gridArea: 'chamado', textAlign: 'center' }}><b>Chamado #  {chamado.id}</b></h2>
                                                     <p style={{ gridArea: 'data', padding: '1%' }}><b>Data do chamado:</b>  {chamado.data.split("T")[0].split("-")[2]}/
                                                                                                                         {chamado.data.split("T")[0].split("-")[1]}/
@@ -337,7 +347,7 @@ class PainelAdm extends Component {
                                             );
                                         } else {
                                             return (
-                                                <div style={{ border: '2px solid #f2f2f2', margin: '2%', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
+                                                <div key={chamado.id} style={{ border: '2px solid #f2f2f2', margin: '1% 2% 2% 0', boxShadow: '1px 1px 10px 0px #F9F9F9', padding: '2% 6%', borderRadius: '3px' }}>
                                                     <h2 style={{ gridArea: 'chamado', textAlign: 'center' }}><b>Chamado #  {chamado.id}</b></h2>
                                                     <p style={{ gridArea: 'data', padding: '1%' }}><b>Data do chamado:</b>  {chamado.data.split("T")[0].split("-")[2]}/
                                                                                                                         {chamado.data.split("T")[0].split("-")[1]}/
@@ -348,7 +358,7 @@ class PainelAdm extends Component {
                                                     <p style={{ gridArea: 'assunto', padding: '1%' }}><b>Assunto:</b>          {chamado.assunto}</p>
                                                     <p style={{ gridArea: 'titulo', padding: '1%' }}><b>Título:</b>            {chamado.titulo}</p>
                                                     <p style={{ gridArea: 'mensagem', padding: '1%' }}><b>Mensagem:</b>        {chamado.descricao}</p>
-                                                    <div style={{ gridArea: 'status', padding: '1%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderTop: '1px solid #BF0811' }}>
+                                                    <div style={{ gridArea: 'status', padding: '1%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', borderTop: '1px solid #cccccc' }}>
                                                         <p style={{ paddingRight: '1%' }}><b>Status:</b></p>
 
                                                         <div style={{ color: '#0891bf', fontWeight: 'bolder', fontStyle: 'italic' }}>
