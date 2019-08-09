@@ -141,12 +141,13 @@ class PainelAdm extends Component {
                     "Authorization": "Bearer " + localStorage.getItem("usuario"),
                 }
             })
-
+            
             .then(data => {
                 console.log(data.status)
                 if (data.status === 200) {
                     this.setState({ Mensagem: 'Atualização bem sucedida.' });
                     this.props.history.push("/painel")
+                    window.location.reload();
                 }
                 if (data.status === 401) {
                         alert('Sessão expirada. É necessário estar logado para acessar esta página');
@@ -237,6 +238,7 @@ class PainelAdm extends Component {
 
                         <div>
                             <select name="idSelecionado" onChange={this.atualizarEstado} required>
+                            <option defaultValue> </option>
                                 {
                                     this.state.listaChamados.map(function (chamado) {
                                         return (
@@ -256,6 +258,7 @@ class PainelAdm extends Component {
                             name="status"
                             onChange={this.atualizarEstado}
                         >
+                            <option defaultValue> </option>
                             <option value="Arquivado">Arquivado</option>
                             <option value='Em Análise'>Em Análise</option>
                             <option value='Atendido'>Atendido</option>
