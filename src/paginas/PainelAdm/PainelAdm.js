@@ -18,7 +18,8 @@ class PainelAdm extends Component {
             data: '',
             qtdChamado: '',
             listaChamados: [],
-            a: []
+            a: [],
+            idSelecionado: ''
         }
     }
 
@@ -35,7 +36,7 @@ class PainelAdm extends Component {
 
     listarChamados() {
 
-        Axios.get("http://localhost:5000/listar",
+        Axios.get("http://192.168.4.32:5000/listar",
             {
                 headers: {
                     "Content-Type": "application/json",
@@ -122,43 +123,49 @@ class PainelAdm extends Component {
     //     this.qtdChamado.filter() 
     // }
 
-    // alterarStatus(event, chamado) {
-    //     event.preventDefault();
-    //     const dados = {
-    //         id: this.state.id,
-    //         status: this.state.status
-    //     }
-    //     console.log(dados)
-    //     Axios.put(`http://localhost:5000/editarstatus/${chamado.id}`,
-    //         dados,
-    //            {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": "Bearer " + localStorage.getItem("usuario")
-    //             }
-    //         })
+    alterarStatus(event, chamado) {
+        event.preventDefault();
+        const dados = {
+            // id: this.state.id,
+            status: this.state.status
+        }
+        // console.log(this.state.idSelecionado)
+        console.log(this.state)
+        // console.log(dados)
+        
+        Axios.put(`http://192.168.4.32:5000/api/Chamados/editarstatus/${this.state.idSelecionado}`,
+            dados,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("usuario"),
+                }
+            })
 
-    //         .then(data => {
-    //             console.log(data.status)
-    //             if (data.status === 200) {
-    //                 this.setState({ Mensagem: 'Atualização bem sucedida.' });
-    //                 alert('Descrição adicionada com sucesso!');
-    //                 this.props.history.push("/painel")
-    //             }
-    //             if (data.status === 401) {
-    //                     alert('Sessão expirada. É necessário estar logado para acessar esta página');
-    //                     this.props.history.push("/login")
-    //             }
-    //         })
+            .then(data => {
+                console.log(data.status)
+                if (data.status === 200) {
+                    this.setState({ Mensagem: 'Atualização bem sucedida.' });
+                    this.props.history.push("/painel")
+                }
+                if (data.status === 401) {
+                        alert('Sessão expirada. É necessário estar logado para acessar esta página');
+                        this.props.history.push("/login")
+                }
+            })
 
-    //         .catch(erro => {
-    //             this.setState({ Mensagem: 'Ocorreu um erro, tente novamente.' + erro });
-    //             console.error(erro)
-    //         })
-    // }
+            .catch(erro => {
+                this.setState({ Mensagem: 'Ocorreu um erro, tente novamente.' + erro });
+                console.error(erro)
+            })
+    }
 
     atualizarEstado = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        console.log( event.target.value);
+        this.setState({ [event.target.name]: event.target.value }, () =>{
+            console.log( this.state);
+        });
+        
     }
 
     render() {
@@ -225,11 +232,11 @@ class PainelAdm extends Component {
                         </div>
 
                         {/* ------------------------------ EDITAR ------------------------------ */}
-                        {/* <p>Selecione o ID do chamado para alterar o status:</p>
+                        <p>Selecione o ID do chamado para alterar o status:</p>
                         <form onSubmit={this.alterarStatus.bind(this)}>
 
                         <div>
-                            <select value={this.state.id} name="chamado" onChange={this.atualizarEstado} required>
+                            <select name="idSelecionado" onChange={this.atualizarEstado} required>
                                 {
                                     this.state.listaChamados.map(function (chamado) {
                                         return (
@@ -243,17 +250,25 @@ class PainelAdm extends Component {
                         </div>
 
                         <label>Selecione o status do chamado:</label>
+                        
                         <select
-                        //  value={this.state.status}
+                            value={this.state.status}
+                            name="status"
                             onChange={this.atualizarEstado}
                         >
                             <option value="Arquivado">Arquivado</option>
                             <option value='Em Análise'>Em Análise</option>
-                            <option value='Atentido'>Atentido</option>
+                            <option value='Atendido'>Atendido</option>
                         </select>
 
+                        {/* <input value={this.state.status}
+                                type='text'
+                        name='status'
+                                    required
+                                    onChange={this.atualizarEstado}></input> */}
+
                         <button type="submit">Alterar status</button>
-                    </form> */}
+                    </form>
                         {/* ------------------------------ FIM EDITAR ------------------------------ */}
 
                         <div>
