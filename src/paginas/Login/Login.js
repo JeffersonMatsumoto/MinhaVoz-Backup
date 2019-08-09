@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Logo from '../../assets/imagens/senai-logo.png';
+import Logo from '../../assets/imagens/minhavoz-logo-vertical.png';
 import Axios from 'axios';
 
 class Login extends Component {
@@ -20,7 +20,7 @@ class Login extends Component {
     efetuarLogin = (event) => {
         event.preventDefault();
     
-        Axios.post("http://192.168.4.32:5000/api/Login", {
+        Axios.post("http://localhost:5000/api/Login", {
           email: this.state.email,
           senha: this.state.senha
         })
@@ -39,7 +39,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"/>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet"/>
                 <div style={{
                     position: 'relative',
                     // height: '100vh',
@@ -55,6 +55,8 @@ class Login extends Component {
                         
                         <img src={Logo} alt='Logo SENAI'
                             style={{
+                                width: '45%',
+                                height: 'auto',
                                 // margin: 'auto'
                                 marginTop: '10%',
                                 padding: '23.2%',
@@ -68,7 +70,7 @@ class Login extends Component {
                             paddingInlineStart: '25%',
                             paddingTop: '25%'
                              }}>
-                            <h2 style={{ textAlign: 'center', fontWeight: 'bolder' }}>LOGIN</h2>
+                            <h2 style={{ fontSize: '18px', textAlign: 'center', fontWeight: '700', color: '#BF0811', paddingBottom: '10%'}}>LOGIN</h2>
                             
                             <label style={{ display: 'flex', flexDirection: 'column', fontWeight: 'bolder' }}>E-mail
                                 <input
@@ -76,12 +78,12 @@ class Login extends Component {
                                     type='email'
                                     name='email'
                                     autoComplete='on'
-                                    maxlength='25'
+                                    maxLength='25'
                                     autoFocus
                                     value={this.state.email}
                                     required
                                     onChange={this.atualizarEstado}
-                                    style={{ backgroundColor: '#f2f2f2', padding: '3%', margin: '1%', border: 'none' }}
+                                    style={{ borderRadius: '3px', backgroundColor: '#f2f2f2', padding: '5%', margin: '1%', border: 'none', fontFamily: 'Montserrat', fontWeight:'700', color:'#777676' }}
                                 />
                             </label>
 
@@ -91,16 +93,16 @@ class Login extends Component {
                                     type='password'
                                     name='senha'
                                     minLength='4'
-                                    autoFocuss
+                                    autoFocus
                                     value={this.state.senha}
                                     required
                                     onChange={this.atualizarEstado}
-                                    style={{ backgroundColor: '#f2f2f2', padding: '3%', margin: '1%', border: 'none' }}
+                                    style={{ borderRadius: '3px', backgroundColor: '#f2f2f2', padding: '5%', margin: '1%', border: 'none', fontFamily: 'Montserrat', fontWeight:'700', color:'#777676' }}
                                 />
                             </label>
 
                             <button
-                                style= {{ backgroundColor: '#151515', color: '#FFF', width: '50%', marginInlineStart: 'auto', marginInlineEnd: 'auto', padding: '3%', fontFamily: 'Montserrat'}}
+                                style= {{ border: 'none', borderRadius: '3px', backgroundColor: '#151515', color: '#FFF', width: '50%', marginInlineStart: 'auto', marginInlineEnd: 'auto', padding: '3%', fontFamily: 'Montserrat'}}
                                 type='submit'
                                 {...this.state.isLoading ? 'disabled' : ''}
                             >

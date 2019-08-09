@@ -6,7 +6,7 @@ import Login from './paginas/Login/Login';
 import PainelAdm from './paginas/PainelAdm/PainelAdm';
 
 import {usuarioAutenticado} from "./servicos/auth";
-import {parseJwt} from './servicos/auth';
+// import {parseJwt} from './servicos/auth';
 
 const PermissaoAdmin = ({ component: Component }) => (
     <Route
